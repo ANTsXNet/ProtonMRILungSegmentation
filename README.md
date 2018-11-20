@@ -13,7 +13,7 @@ Deep learning app made for proton-weighted MRI lung segmentation using ANTsRNet
 ```
 #
 #  Usage:
-#    Rscript doBrainExtraction.R inputImage outputImage reorientationTemplate weights
+#    Rscript doBrainExtraction.R inputImage outputPrefix reorientationTemplate weights
 #
 
 $ Rscript Scripts/doLungSegmentation.R Data/Example/0005Proton.nii.gz 0005Output Data/Template/T_template0.nii.gz Data/Weights/lungSegmentationWeights.h5
