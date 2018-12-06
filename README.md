@@ -13,19 +13,26 @@ Deep learning app made for proton-weighted MRI lung segmentation using ANTsRNet
 ```
 #
 #  Usage:
-#    Rscript doBrainExtraction.R inputImage outputPrefix reorientationTemplate weights
+#    Rscript doLungSegmentation.R inputImage outputPrefix reorientationTemplate
 #
 
-$ Rscript Scripts/doLungSegmentation.R Data/Example/0005Proton.nii.gz 0005Output Data/Template/T_template0.nii.gz Data/Weights/lungSegmentationWeights.h5
+$ Rscript Scripts/doLungSegmentation.R Data/Example/0005Proton.nii.gz 0005Output Data/Template/T_template0.nii.gz
 
-Reading reorientation template Data/Template/T_template0.nii.gz  (elapsed time: 0.02635503 seconds)
-Loading weights file Data/Weights/lungSegmentationWeights.h52018-11-19  (elapsed time: 0.5598979 seconds)
-Reading  Data/Example/0005Proton.nii.gz  (elapsed time: 0.04004812 seconds)
-Normalizing to template  (elapsed time: 0.05562806 seconds)
-Prediction and decoding (elapsed time: 59.35653 seconds)
-Renormalize to native space and write image  (elapsed time: 0.190855 seconds)
+Reading reorientation template Data/Template/T_template0.nii.gz  (elapsed time: 0.02212381 seconds)
+Using TensorFlow backend.
+Loading weights filetrying URL 'https://ndownloader.figshare.com/files/13606799'
+Content type 'application/octet-stream' length 58290064 bytes (55.6 MB)
+==================================================
+downloaded 55.6 MB
 
-Total elapsed time: 59.66657 seconds
+2018-11-19 18:21:26.107101: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+  (elapsed time: 1.159739 seconds)
+Reading  Data/Example/0005Proton.nii.gz  (elapsed time: 0.01589298 seconds)
+Normalizing to template  (elapsed time: 0.05258799 seconds)
+Prediction and decoding (elapsed time: 1.054019 seconds)
+Renormalize to native space and write image  (elapsed time: 0.1998382 seconds)
+
+Total elapsed time: 1.058827 seconds
 ```
 
 ## Sample results

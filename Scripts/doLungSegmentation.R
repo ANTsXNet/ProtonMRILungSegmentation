@@ -4,16 +4,15 @@ library( keras )
 
 args <- commandArgs( trailingOnly = TRUE )
 
-if( length( args ) != 4 )
+if( length( args ) != 3 )
   {
   helpMessage <- paste0( "Usage:  Rscript doBrainExtraction.R",
-    " inputFile outputFilePrefix reorientationTemplate modelWeights \n" )
+    " inputFile outputFilePrefix reorientationTemplate\n" )
   stop( helpMessage )
   } else {
   inputFileName <- args[1]
   outputFileName <- args [2]
   reorientTemplateFileName <- args[3]
-  weightsFileName <- args[4]
   }
 
 classes <- c( "background", "leftLung", "rightLung" )
@@ -36,8 +35,9 @@ unetModel <- createUnetModel3D( c( resampledImageSize, channelSize ),
   numberOfLayers = 4, numberOfFiltersAtBaseLayer = 16, dropoutRate = 0.0,
   convolutionKernelSize = c( 7, 7, 5 ), deconvolutionKernelSize = c( 7, 7, 5 ) )
 
-cat( "Loading weights file", weightsFileName )
+cat( "Loading weights file" )
 startTime <- Sys.time()
+weightsFileName <- getPretrainedNetwork( "protonLungMri" )
 load_model_weights_hdf5( unetModel, filepath = weightsFileName )
 endTime <- Sys.time()
 elapsedTime <- endTime - startTime
