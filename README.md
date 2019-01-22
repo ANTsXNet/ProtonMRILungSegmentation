@@ -6,6 +6,12 @@ Deep learning app made for proton-weighted MRI lung segmentation using ANTsRNet
 
 * Nicholas J. Tustison, Brian B. Avants, Zixuan Lin, Xue Feng, Nicholas Cullen, Jaime F. Mata, Lucia Flors, James C. Gee, Talissa A. Altes, John P. Mugler III, and Kun Qing.  Convolutional Neural Networks with Template-Based Data Augmentation for Functional Lung Image Quantification, _Academic Radiology_. [(pubmed)](https://www.ncbi.nlm.nih.gov/pubmed/30195415)
 
+## Prerequisites
+
+* [R](https://www.r-project.org) installation
+* [ANTsR](https://github.com/ANTsX/ANTsR) installation
+* [ANTsRNet](https://github.com/ANTsX/ANTsRNet) installation
+
 ## Model training notes
 
 * Training data: Proton lung MRI of various slice thickness
