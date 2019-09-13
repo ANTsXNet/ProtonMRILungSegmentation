@@ -59,7 +59,7 @@ Total elapsed time: 1.058827 seconds
 #    python3 doLungSegmentation.py inputImage outputPrefix reorientationTemplate
 #
 
-$ python3 Scripts/doLungSegmentation.R Data/Example/0005Proton.nii.gz 0005Output Data/Template/T_template0.nii.gz
+$ python3 Scripts/doLungSegmentation.py Data/Example/0005Proton.nii.gz 0005Output Data/Template/T_template0.nii.gz
 
 Using TensorFlow backend.
 Reading reorientation template Data/Template/T_template0.nii.gz
