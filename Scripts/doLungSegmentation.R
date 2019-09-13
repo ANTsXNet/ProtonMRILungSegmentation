@@ -15,7 +15,7 @@ if( length( args ) != 3 )
   reorientTemplateFileName <- args[3]
   }
 
-classes <- c( "background", "leftLung", "rightLung" )
+classes <- c( "Background", "LeftLung", "RightLung" )
 numberOfClassificationLabels <- length( classes )
 
 imageMods <- c( "Proton" )
@@ -37,15 +37,15 @@ unetModel <- createUnetModel3D( c( resampledImageSize, channelSize ),
 
 cat( "Loading weights file" )
 startTime <- Sys.time()
-weightsFileName <- getPretrainedNetwork( "protonLungMri" )
-load_model_weights_hdf5( unetModel, filepath = weightsFileName )
+weightsFileName <- "./lungSegmentationWeights.h5"
+if( !file.exists( weightsFileName ) )
+  {
+  weightsFileName <- getPretrainedNetwork( "protonLungMri", weightsFileName )
+  }
+unetModel$load_weights( weightsFileName )
 endTime <- Sys.time()
 elapsedTime <- endTime - startTime
 cat( "  (elapsed time:", elapsedTime, "seconds)\n" )
-
-unetModel %>% compile( loss = loss_multilabel_dice_coefficient_error,
-  optimizer = optimizer_adam( lr = 0.0001 ),
-  metrics = c( multilabel_dice_coefficient ) )
 
 # Process input
 
@@ -84,12 +84,13 @@ cat( " (elapsed time:", elapsedTime, "seconds)\n" )
 
 cat( "Renormalize to native space and write image" )
 startTime <- Sys.time()
-probabilityImage <- applyAntsrTransformToImage( invertAntsrTransform( xfrm ),
-  probabilityImagesArray[[1]][[2]], image )
-antsImageWrite( probabilityImage, paste0( outputFileName, "Probability1.nii.gz" ) )
-probabilityImage <- applyAntsrTransformToImage( invertAntsrTransform( xfrm ),
-  probabilityImagesArray[[1]][[3]], image )
-antsImageWrite( probabilityImage, paste0( outputFileName, "Probability2.nii.gz" ) )
+
+for( i in seq( 2, numberOfClassificationLabels ) )
+  {
+  probabilityImage <- applyAntsrTransformToImage( invertAntsrTransform( xfrm ),
+    probabilityImagesArray[[1]][[i]], image )
+  antsImageWrite( probabilityImage, paste0( outputFileName, classes[i], "Probability.nii.gz" ) )
+  }
 endTime <- Sys.time()
 elapsedTime <- endTime - startTime
 cat( "  (elapsed time:", elapsedTime, "seconds)\n" )
