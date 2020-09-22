@@ -1,3 +1,8 @@
+
+# **** This application has moved to the ANTsPyNet/ANTsRNet repositories.  The following is deprecated. ****
+
+----------------------------------
+
 # App:  Lung MRI segmentation
 
 Deep learning app made for proton-weighted MRI lung segmentation using ANTsRNet
